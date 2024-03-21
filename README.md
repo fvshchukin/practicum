@@ -1,4 +1,4 @@
-# Операции с папками и файлами: создание, копирование, перемещение
+## Операции с папками и файлами: создание, копирование, перемещение
 
 ## Создание файлов и директорий — touch, mkdir
 
@@ -1195,7 +1195,7 @@ ls - la
 
 ![Шпаргалка markdown](https://pictures.s3.yandex.net/resources/M2_T4_03_1685964697.png)
 
-**Задание для самостоятельной работы\***
+**_Задание для самостоятельной работы_**
 
 Потренируйтесь использовать маркдаун. Оформите файл README.md для репозитория first-project. Сейчас в нём есть файл readme.txt, который вы создали в начале модуля. Удалите файл и создайте новый с расширением .md.
 
@@ -1732,7 +1732,7 @@ graph TD;
 
 ## Необходимое программное обеспечение
 
-- Необходимо установить программу mmdc из проекта https://github.com/mermaid-js/mermaid-cli.
+- Необходимо установить программу mmdc из проекта `https://github.com/mermaid-js/mermaid-cli`.
 
 yarn global add @mermaid-js/mermaid-cli
 
@@ -2107,7 +2107,7 @@ flowchart TB
     D(arrows go wonky) --> E(give up)
 ```
 
-### Primer
+Primer
 
 ```mermaid
 flowchart TB
@@ -2118,7 +2118,7 @@ flowchart TB
     D(arrows go wonky) ==> E[/give up\]
 ```
 
-### Primer
+Primer
 
 ```mermaid
     classDiagram
@@ -2130,7 +2130,7 @@ flowchart TB
     }
 ```
 
-### Primer
+Primer
 
 ```mermaid
     classDiagram
@@ -2150,7 +2150,7 @@ flowchart TB
     GameObject <|-- DamageableObject
 ```
 
-### Primer
+Primer
 
 ```mermaid
 classDiagram
@@ -2186,7 +2186,7 @@ classDiagram
     DamageableObject <|-- Monster
 ```
 
-### Primer
+Primer
 
 ```mermaid
 classDiagram
