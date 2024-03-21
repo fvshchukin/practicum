@@ -1699,3 +1699,507 @@ GitHub можно использовать не только для хранен
 - оно информативное;
 
 - все сообщения оформлены в одном стиле.
+
+## Внедрение Mermaid в Markdown
+
+- Для блока кода, отмеченного как mermaid:
+  - система создаёт новый фрейм iframe,
+  - необработанный код из блока передаётся его в Mermaid.js,
+  - код преобразуется в диаграмму.
+- Пример входного кода
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
+- Результирующее изображение
+
+## Поддерживаемые типы диаграмм
+
+- Блок-схемы (Flowchart)
+- Диаграммы состояния (Sequence diagram)
+- Диаграммы Ганта (Gantt diagram)
+- UML-диаграммы классов (Class diagram)
+- Графы git (Git graph)
+- ER-диаграммы (Entity Relationship Diagram)
+- Диаграммы пользовательского пути (User Journey Diagram)
+- Диаграммы последовательности (Sequence diagrams)
+- Круговые диаграммы (Pie chart)
+
+## Необходимое программное обеспечение
+
+- Необходимо установить программу mmdc из проекта https://github.com/mermaid-js/mermaid-cli.
+
+yarn global add @mermaid-js/mermaid-cli
+
+## Блок-схемы (Flowchart)
+
+### Синтаксис
+
+- Ключевое слово: flowchart и аббревиатуры для указания направления.
+
+- subgraph <имя>: задаёт поддиаграммы.
+
+  - end: завершает описание поддиаграммы.
+
+- Основная часть диаграммы — это узлы.
+
+  - Текст на диаграмме узла берётся из названия.
+
+  - Альтернативно можно указать отображаемый текст в квадратных скобках.
+
+  - Форма узлов задаётся скобочными символами вокруг текста.
+
+  - Для экранирования используют кавычки.
+
+    - Всё содержимое в кавычках считается текстом.
+
+- click: задаёт ссылку для узла.
+
+click <узел> "<ссылка>" <\_blank>
+
+- Ссылка заключается в кавычки.
+
+- \_blank: указывает открыть ссылку в новой вкладке.
+
+- Направление диаграммы:
+
+  - TB: сверху вниз (top to bottom);
+
+  - TD: сверху вниз (top-down);
+
+  - BT: снизу вверх (bottom to top);
+
+  - RL: справа налево (right to left);
+
+  -LR: слева направо (left to right).
+
+- style: задаёт оформление диаграммы.
+
+style <узел> <style_tag:значение>,<style_tag:значение>
+
+- Теги стилей:
+
+  - fill: заливка;
+
+  - stroke: цвет границы;
+
+  - stroke-width: толщина границы;
+
+  - color: цвет текста;
+
+  - stroke-dasharray: пунктирная граница.
+
+- classDef: задаёт класс, содержащий набор стилей.
+
+classDef <имя_класса> <style_tag:значение>,<style_tag:значение>
+
+- ::: указывает класс после имени узла.
+
+### Примеры
+
+- Блок
+
+```mermaid
+flowchart TB
+     node
+```
+
+- Блок с текстом
+
+```mermaid
+flowchart TB
+    node[Text]
+```
+
+- Формы узлов
+
+```mermaid
+flowchart TB
+  node1[Форма1]
+  node2(Форма2)
+  node3([Форма3])
+  node4[[Форма4]]
+  node5[(Форма5)]
+  node6((Форма6))
+  node7>Форма7]
+  node8{Форма8}
+  node9{{Форма9}}
+  node10[/Форма10/]
+  node11[\Форма11\]
+  node12[/Форма12\]
+  node13[\Форма13/]
+```
+
+- Стрелки
+
+```mermaid
+flowchart TB
+A-->B
+C---D
+E-.-F
+G==>H
+I--oJ
+K--xL
+```
+
+- Стрелки с текстом
+
+```mermaid
+flowchart TD
+A--Text---B
+C---|Text|D
+E-->|Text|F
+G--Text-->H
+I-.Text.->J
+K==Text==>l
+```
+
+- Поддиаграммы
+
+```mermaid
+flowchart TB
+ c1 --> a2
+      subgraph one
+          a1 --> a2
+      end
+      subgraph two
+          b1 --> b2
+      end
+      subgraph three
+          c1 --> c2
+      end
+```
+
+Важно!!! Соблюдать табуляцию!
+
+- Ссылки
+
+```mermaid
+flowchart TB
+  A --> B
+  B --> A
+  B ==Text==> C
+  C -.Text.- A
+  click A "https://yamadharma.github.io/ru/post/2021/01/03/diagrams-mermaid/" _blank
+  click B "http://www.github.com" _blank
+```
+
+- Стили
+
+```mermaid
+flowchart LR
+    id1(Start)-->id2(Stop)
+    style id1 fill:#3f3,stroke:3333,stroke-width:4px
+    style id2 fill:#ff2400,stroke:#333,stroke-width:4px,color:#fff,stroke-dasharray: 12 5
+```
+
+- Классы стилей
+
+```mermaid
+ flowchart LR
+      classDef class1 fill:#3f3,stroke:#333,stroke-width:4px
+      classDef class2 fill:#ff2400,stroke:#333,stroke-width:4px,color:#fff,stroke-dasharray: 12 5
+
+      A(Start):::class1 --> B(Stop):::class2
+```
+
+Basic Pie Chart
+
+```mermaid
+pie title NETFLIX
+         "Time spent looking for movie" : 90
+         "Time spent watching it" : 10
+```
+
+What Voldemort doesn't have?
+
+```mermaid
+pie title What Voldemort doesn't have?
+         "FRIENDS" : 2
+         "FAMILY" : 3
+         "NOSE" : 45
+```
+
+Basic sequence diagram
+
+```mermaid
+sequenceDiagram
+    Alice ->> Bob: Hello Bob, how are you?
+    Bob-->>John: How about you John?
+    Bob--x Alice: I am good thanks!
+    Bob-x John: I am good thanks!
+    Note right of John: Bob thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.
+
+    Bob-->Alice: Checking with John...
+    Alice->John: Yes... John, how are you?
+```
+
+Basic flowchart
+
+```mermaid
+graph LR
+    A[Square Rect] -- Link text --> B((Circle))
+    A --> C(Round Rect)
+    B --> D{Rhombus}
+    C --> D
+```
+
+Larger flowchart with some styling
+
+```mermaid
+graph TB
+    sq[Square shape] --> ci((Circle shape))
+
+    subgraph A
+        od>Odd shape]-- Two line<br/>edge comment --> ro
+        di{Diamond with <br/> line break} -.-> ro(Rounded<br>square<br>shape)
+        di==>ro2(Rounded square shape)
+    end
+
+    %% Notice that no text in shape are added here instead that is appended further down
+    e --> od3>Really long text with linebreak<br>in an Odd shape]
+
+    %% Comments after double percent signs
+    e((Inner / circle<br>and some odd <br>special characters)) --> f(,.?!+-*ز)
+
+    cyr[Cyrillic]-->cyr2((Circle shape Начало));
+
+     classDef green fill:#9f6,stroke:#333,stroke-width:2px;
+     classDef orange fill:#f96,stroke:#333,stroke-width:4px;
+     class sq,e green
+     class di orange
+```
+
+SequenceDiagram: Loops, alt and opt
+
+```mermaid
+sequenceDiagram
+    loop Daily query
+        Alice->>Bob: Hello Bob, how are you?
+        alt is sick
+            Bob->>Alice: Not so good :(
+        else is well
+            Bob->>Alice: Feeling fresh like a daisy
+        end
+
+        opt Extra response
+            Bob->>Alice: Thanks for asking
+        end
+    end
+```
+
+SequenceDiagram: Message to self in loop
+
+```mermaid
+sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop HealthCheck
+        John->>John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts<br/>prevail...
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!
+```
+
+Sequence Diagram: Blogging app service communication
+
+```mermaid
+sequenceDiagram
+    participant web as Web Browser
+    participant blog as Blog Service
+    participant account as Account Service
+    participant mail as Mail Service
+    participant db as Storage
+
+    Note over web,db: The user must be logged in to submit blog posts
+    web->>+account: Logs in using credentials
+    account->>db: Query stored accounts
+    db->>account: Respond with query result
+
+    alt Credentials not found
+        account->>web: Invalid credentials
+    else Credentials found
+        account->>-web: Successfully logged in
+
+        Note over web,db: When the user is authenticated, they can now submit new posts
+        web->>+blog: Submit new post
+        blog->>db: Store post data
+
+        par Notifications
+            blog--)mail: Send mail to blog subscribers
+            blog--)db: Store in-site notifications
+        and Response
+            blog-->>-web: Successfully posted
+        end
+    end
+
+```
+
+A commit flow diagram.
+
+```mermaid
+gitGraph:
+    commit "Ashish"
+    branch newbranch
+    checkout newbranch
+    commit id:"1111"
+    commit tag:"test"
+    checkout main
+    commit type: HIGHLIGHT
+    commit
+    merge newbranch
+    commit
+    branch b2
+    commit
+```
+
+```mermaid
+mindmap
+      root(Фёдор Щукин))
+        Destinations
+          Europe
+            France(Paris)
+            Italy(Rome)
+            Russia(Moskau)
+          Asia
+            Japan(Tokyo)
+            Сибирь(Новосибирск)
+            Урал(Екатеринбург)
+            Забайкалье(Чита)
+            Дальний Восток(Владивосток)
+        Budget
+          Airfare
+          Hotels
+          Food
+        Activities
+          Sightseeing
+          Adventure Sports
+        Accommodation
+          Hotels
+          Vacation Rentals
+```
+
+```mermaid
+graph LR;
+    A--> B & C & D;
+    B--> A & E;
+    C--> A & E;
+    D--> A & E;
+    E--> B & C & D;
+```
+
+### Primer
+
+```mermaid
+flowchart TB
+    A(need diagram) --> B(draw flow chart)
+    B(draw flow chart) --> C(reposition arrows)
+    C(reposition arrows) --> D(arrows go wonky)
+    D(arrows go wonky) --try again--> B(draw flow chart)
+    D(arrows go wonky) --> E(give up)
+```
+
+### Primer
+
+```mermaid
+flowchart TB
+    A{need diagram} --> B[(draw flow chart)]
+    B[(draw flow chart)] --> C((reposition arrows))
+    C((reposition arrows)) --> D(arrows go wonky)
+    D(arrows go wonky) --try again--> B[(draw flow chart)]
+    D(arrows go wonky) ==> E[/give up\]
+```
+
+### Primer
+
+```mermaid
+    classDiagram
+    class GameObject {
+        -String Name
+        -int PosX
+        -int PosY
+        +Despawn() void
+    }
+```
+
+### Primer
+
+```mermaid
+    classDiagram
+    class GameObject {
+        -String Name
+        -int PosX
+        -int PosY
+        +Despawn() void
+    }
+    class DamageableObject {
+        +int MaxHealth
+        -int Health
+        +IsDead() bool
+        +TakeDamage(int damage) void
+        +OnKilled() void
+    }
+    GameObject <|-- DamageableObject
+```
+
+### Primer
+
+```mermaid
+classDiagram
+    note "This is a note for the whole diagram"
+    note for Player "This is a note on the Player class"
+    class GameObject {
+        +String Name
+        +int PosX
+        +int PosY
+        +Despawn() void
+    }
+    class DamageableObject {
+        <<abstract>>
+        +int MaxHealth
+        -int Health
+        +IsDead() bool
+        +TakeDamage(int damage) void
+        +OnKilled()* void
+    }
+    class Player {
+        -int Score
+        -int LivesRemaining
+        +OnKilled() void
+    }
+    class Monster {
+        -int ThreatLevel
+        -Color Color
+        +MakeNoise(double decibelLevel) string
+        +OnKilled() void
+    }
+    GameObject <|-- DamageableObject
+    DamageableObject <|-- Player
+    DamageableObject <|-- Monster
+```
+
+### Primer
+
+```mermaid
+classDiagram
+    Human *-- Cells : composed of
+    Salesperson o-- Sales : makes
+    Human <|-- Salesperson : is
+```
+
+```mermaid
+flowchart TB
+    A[Deploy to production] ==> B{Is It Friday?}
+    B{Is It Friday?} --Yes--> C[Do not deploy!]
+    B{Is It Friday?} --Noun--> D[Run deploy.sh to deploy!]
+    C[Do not deploy!] --> E[Enjoy your weekend!]
+    D[Run deploy.sh to deploy!] --> E[Enjoy your weekend!]
+```
